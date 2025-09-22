@@ -1,0 +1,32 @@
+# Enable WSL2 Ubuntu GUI and use RDP to Remote
+
+# Step 1 — Installing a Desktop Environment on Ubuntu
+sudo apt update && sudo apt -y upgrade
+sudo apt install xfce4 xfce4-goodies -y
+
+# Step 2 — Installing xrdp on Ubuntu
+# xrdp is an open-source implementation of the RDP server that allows RDP connections for Linux-based servers
+sudo apt install xrdp -y
+
+# After installing xrdp, verify the status of xrdp using systemctl:
+sudo systemctl status xrdp
+
+# If the status of xrdp is not running, you may have to start the service manually with this command:
+sudo systemctl start xrdp
+
+# Step 3 — Configuring xrdp
+sudo vim /etc/xrdp/xrdp.ini
+
+# Add the Xrdp User to the SSL-Cert Group
+sudo usermod -a -G ssl-cert xrdp
+
+# Restart the xrdp server
+sudo systemctl restart xrdp
+
+# Step 4 — Testing the RDP Connection
+
+Get IP
+ip a
+
+# Now launch your Windows Remote Desktop Connection
+-> Enter the IP address of the Ubuntu system

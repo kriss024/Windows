@@ -1,0 +1,120 @@
+1) Microsoft's Windows Subsystem For Linux (WSL) installation
+Execute the following commands in a Windows Powershell terminal run as an Administrator:
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+wsl --install
+
+2) Install WSL2 with specific distro on Windows 11
+wsl --list --online
+wsl --install -d <DISTRO-NAME>
+wsl --install -d Ubuntu-20.04
+
+3) Useful Commands
+Update WSL:	wsl --update
+List all available Distribution: wsl --list --online
+Set default WSL version: wsl --set-default-version 2
+Set default Linux distribution:	wsl --set-default <Distribution Name>
+Change directory to home: wsl ~
+Check WSL status: wsl --status
+To shutdown WSL: wsl --shutdown
+To terminate or stop from running a specific distribution: wsl --terminate <Distribution Name>
+Export a distribution to a TAR file: wsl --export <Distribution Name> <FileName>
+Import a new distribution: wsl --import <Distribution Name> <InstallLocation> <FileName>
+Unregister or uninstall a Linux distribution: wsl --unregister <DistributionName>
+
+4) Global configuration file for WSL2
+# C:\Users\<UserName>\.wslconfig
+# %UserProfile%\.wslconfig
+
+[wsl2]
+memory=16GB
+processors=8
+localhostForwarding=true
+pageReporting=false
+
+5) Update Linux
+Enter the following commands in the Linux terminal:
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get dist-upgrade
+sudo apt-get autoremove
+
+6) Set a Default Linux Distribution
+Entered in a Windows Powershell terminal:
+wsl --list
+wsl --setdefault <DistributionName>
+
+7) Install Windows Terminal from the Microsoft Store
+To launch the Linux terminal, you can use the Ubuntu icon, enter wsl or bash in Powershell, or use any third-party option such as Cmder, ConEmu, or Hyper. 
+Profiles can be defined to launch %windir%\system32\bash.exe ~.
+
+Options are defined in the settings.json file accessed from the Settings menu or Ctrl + , (comma). Default values and theme settings can be viewed in defaults.json, accessed by holding down Alt while clicking the Settings menu.
+
+8) Accessing Linux Files from Windows
+Linux files can be accessed at the network path \\wsl$\
+Your installed Linux distros are listed, so you can access the Ubuntu root directory at \\wsl$\Ubuntu
+Your personal Linux files will typically be stored at: \\wsl$\Ubuntu\home\<yourname>
+
+It’s best to use this as the starting folder in Windows Terminal. Open the Settings, and add the following configuration line to the Ubuntu profile:
+"startingDirectory": "//wsl$/Ubuntu/home/<yourname>/",
+
+9) Map a Network Drive
+You can mount a network drive to \\wsl$\Ubuntu\ by opening \\wsl$\ in File Explorer
+Unfortunately, it’s not currently possible to map deeper subdirectories. You may also encounter mapped-drive issues with some applications.
+
+10) Accessing Windows Files from Linux
+Windows drives are mounted in the Linux /mnt/ directory
+For example, your personal Users folder in Windows is available at:
+/mnt/c/Users/<yourname>
+
+11) Running Linux Commands from Windows
+Any Linux (bash) shell command can be run from a Windows Powershell or command line terminal using wsl:
+wsl <linux-command>
+
+12) Running Windows Applications from Linux
+Any Windows executable can be launched from Linux (it’s normally necessary to specify the .exe extension). For example, to open the current Linux directory in File Explorer, enter:
+explorer.exe .
+
+Open the a specific project directory in VS Code:
+code ~/projects/mywebsite
+
+13) Installing Applications
+Always remember you’re running two operating systems. They may be highly integrated, but there are situations when you want an application installed in one or both.
+
+It may be practical to use Git from either Windows or Linux. The Windows edition is installed by downloading an executable, but Git on Ubuntu is installed using:
+sudo apt-get update
+sudo apt-get install git-all
+
+14) Installing Docker
+
+15) WSL2 and localhost
+Applications running on Windows, WSL2 Linux, and Docker containers are always accessed from localhost or 127.0.0.1.
+
+16) VS Code WSL2 Integration
+The WSL2 shell can be chosen as the default VS Code terminal by pressing Ctrl + Shift + P and typing/choosing Terminal: Select Default Shell, then selecting WSL Bash:
+
+After installing Remote – WSL, you can navigate to any Linux directory and launch a WSL-connected instance of VS Code:
+cd ~/myproject
+code .
+
+-----------------------------------------
+Run Linux as a Specific User
+Enter the following command in a Windows Powershell terminal:
+wsl --user <username>
+
+Move Your Linux Disk Image
+In a Windows Powershell terminal enter:
+mkdir D:\backup
+wsl --export Ubuntu D:\backup\ubuntu.tar
+
+Unregister the same distribution to remove it
+wsl --unregister Ubuntu
+
+Import the backup into a new WSL2 distribution at another location
+mkdir D:\wsl
+wsl --import Ubuntu D:\wsl\ D:\backup\ubuntu.tar
+
+Verify it has been successfully created by entering wsl --list
+
+To use your own account, enter the following command:
+ubuntu config --default-user <yourname>

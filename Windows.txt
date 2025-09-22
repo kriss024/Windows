@@ -1,0 +1,25 @@
+# Changing the number of processor in msconfig
+msconfig
+
+# To disable Hibernation
+powercfg.exe /hibernate off
+
+# Enable the Ultimate Performance Power Plan in Windows 10
+powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+
+# Fixing installation files with DISM
+DISM /Online /Cleanup-image /Restorehealth
+
+# That will bring up the original product key that came with your computer, like in the example below
+wmic path SoftwareLicensingService get OA3xOriginalProductKey
+
+# Launching a website via windows commandline
+explorer "https://google.com"
+explorer "https://localhost:9443"
+
+# View All Applications in Windows 10/11
+shell:AppsFolder
+
+# Run powershell or cmd and command line with command
+powershell.exe -command "ssh <yourname>@server"
+%windir%\system32\cmd.exe /k "ssh <yourname>@server"
