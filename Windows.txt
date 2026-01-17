@@ -13,7 +13,7 @@ DISM /Online /Cleanup-image /Restorehealth
 # That will bring up the original product key that came with your computer, like in the example below
 wmic path SoftwareLicensingService get OA3xOriginalProductKey
 
-# Windows Package Manager
+# Windows Package Manager, Repository: https://winget.run/
 winget
 
 # Launching a website via windows commandline
