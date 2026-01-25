@@ -16,6 +16,9 @@ wmic path SoftwareLicensingService get OA3xOriginalProductKey
 # Windows Package Manager, Repository: https://winget.run/
 winget
 
+# Generate file hash
+certutil -HashFile <file name> SHA256
+
 # Launching a website via windows commandline
 explorer "https://google.com"
 explorer "https://localhost:9443"
