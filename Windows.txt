@@ -29,3 +29,6 @@ shell:AppsFolder
 # Run powershell or cmd and command line with command
 powershell.exe -command "ssh <yourname>@server"
 %windir%\system32\cmd.exe /k "ssh <yourname>@server"
+
+# Find Microsoft Windows product key
+wmic path softwarelicensingservice get OA3xOriginalProductKey
