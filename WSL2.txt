@@ -30,7 +30,6 @@ Unregister or uninstall a Linux distribution: wsl --unregister <DistributionName
 memory=16GB
 processors=8
 localhostForwarding=true
-pageReporting=false
 
 5) Update Linux
 Enter the following commands in the Linux terminal:
